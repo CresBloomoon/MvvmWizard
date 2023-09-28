@@ -2,11 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
@@ -91,8 +94,12 @@ namespace MvvmWizard.Controls
 
             this.TransitionController = new TransitionController(
                 this.ShowPreviousStep,
+                () => this.ShowNextStep(false),
+                () => this.ShowNextStep(true),
+                x => this.FinishCommand?.Execute(x),
+                () => this.SharedContext);
 
-                )
+            this.Loaded += this.OnLoaded;
         }
 
         public Dictionary<string, object> SharedContext
@@ -146,6 +153,191 @@ namespace MvvmWizard.Controls
                 this.RaisePropertyChanged();
             }
         }
+
+        public async void TryTransitTo(int transitToIndex, bool skippingStep = false)
+        {
+            try
+            {
+                this.IsTransiting = true;
+                await this.TransitTo(transitToIndex, skippingStep);
+            }
+            finally
+            {
+                this.IsTransiting = false;
+            }
+        }
+
+        protected override void OnSelectionChanged(SelectionChangedEventArgs e)
+        {
+            foreach (WizardStep step in e.RemovedItems.OfType<WizardStep>())
+            {
+                step.IsSelected = false;
+            }
+
+            if (e.AddedItems.Count == 0)
+            {
+                base.OnSelectionChanged(e);
+                return;
+            }
+
+            var selectedStep = (WizardStep)e.AddedItems[0];
+            selectedStep.IsSelected = true;
+
+            if (DesignerProperties.GetIsInDesignMode(this))
+            {
+                return;
+            }
+
+            this.RaisePropertyChanged(nameof(this.CurrentStep));
+            this.RaisePropertyChanged(nameof(this.IsFirstStep));
+            this.RaisePropertyChanged(nameof(this.IsLastStep));
+
+            base.OnSelectionChanged(e);
+        }
+
+        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            this.Loaded -= this.OnLoaded;
+
+            this.TryTransitTo(this.FirstStepIndex);
+        }
+
+        private void ShowNextStep(bool skippingStep)
+        {
+            int navigateTo = this.CurrentStepIndex + 1;
+
+            if (this.UseCircularNavigation && this.IsLastStep)
+            {
+                navigateTo = this.FirstStepIndex;
+            }
+
+            this.TryTransitTo(navigateTo, skippingStep);
+        }
+
+        private void ShowPreviousStep()
+        {
+            int navigateTo = this.CurrentStepIndex - 1;
+
+            if (this.UseCircularNavigation && this.IsFirstStep)
+            {
+                navigateTo = this.LastStepIndex;
+            }
+
+            this.TryTransitTo(navigateTo);
+        }
+
+        private async Task TransitTo(int transitToIndex, bool skippingStep)
+        {
+            var transitionConext = new TransitionContext
+            {
+                SharedContext = this.SharedContext,
+                TransitedFromStep = this.CurrentStepIndex,
+                TransitToStep = transitToIndex,
+                IsSkipAction = skippingStep,
+
+                StepIndices =
+                                               this.Items.Cast<WizardStep>().Select((x, i) => new { Name = x.Name, Index = i }).ToDictionary(
+                                                   x => x.Index,
+                                                   x => x.Name),
+            };
+
+            bool navigatingForward = !this.IsFirstStep && !this.IsLastStep && this.CurrentStepIndex < transitToIndex;
+            navigatingForward |= this.IsFirstStep && transitToIndex != this.LastStepIndex;
+            navigatingForward |= this.IsLastStep && transitToIndex == this.FirstStepIndex;
+
+            /* Transit From (OnLoaded starts with "-1") */
+            if (this.CurrentStepIndex >= this.FirstStepIndex)
+            {
+                var navigateFromView = (FrameworkElement)this.CurrentStep.Content;
+                var navigateFrom = navigateFromView?.DataContext as ITransitionAware;
+
+                if (navigateFrom != null)
+                {
+                    await navigateFrom.OnTransitedFrom(transitionConext);
+
+                    if (transitionConext.AbortTransition)
+                    {
+                        return;
+                    }
+                }
+
+                this.CurrentStep.IsProcessed = !skippingStep && navigatingForward;
+            }
+
+            /* Non-circular and index was not changed (by user) -> Special cases for first and last steps */
+            if (!this.UseCircularNavigation && transitionConext.TransitToStep == transitToIndex)
+            {
+                /* First step and navigating back. */
+                if (this.IsFirstStep && transitToIndex < this.FirstStepIndex)
+                {
+                    return;
+                }
+
+                /* Lasts step and navigating forward. */
+                if (this.IsLastStep && transitToIndex > this.LastStepIndex)
+                {
+                    this.FinishCommand?.Execute(this.SharedContext);
+                    return;
+                }
+            }
+
+            transitToIndex = transitionConext.TransitToStep;
+
+            if (transitToIndex > this.LastStepIndex)
+            {
+                string message =
+                    $"Failed navigating to the step with index {transitToIndex} (Index out of range, max index is {this.LastStepIndex})";
+
+                throw new IndexOutOfRangeException(message);
+            }
+
+            Debug.WriteLine($"Navigating to index {transitToIndex}");
+
+            WizardStep stepToSelect = (WizardStep)this.Items[transitToIndex];
+
+            if (stepToSelect.Content == null && stepToSelect.ViewType != null)
+            {
+                if (WizardSettings.Instance.ViewResolver == null)
+                {
+                    throw new NullReferenceException("WizardSettings.Instance.ViewResolver is not set.");
+                }
+
+                stepToSelect.Content = WizardSettings.Instance.ViewResolver(stepToSelect.ViewType);
+            }
+
+            /* Transit To */
+            var navigateToView = (FrameworkElement)stepToSelect.Content;
+            stepToSelect.UnderlyingDataContext = navigateToView?.DataContext;
+            this.SelectedItem = stepToSelect;
+
+            if (this.IsTransitionAnimationEnabled)
+            {
+                Storyboard storyboard = navigatingForward
+                                            ? (this.ForwardTransitionAnimation ?? DefaultForwardTransitionAnimation)
+                                            : (this.BackwardTransitionAnimation ?? DefaultBackwardTransitionAnimation);
+
+                navigateToView?.BeginStoryboard(storyboard);
+            }
+
+            var navigateTo = navigateToView?.DataContext as ITransitionAware;
+
+            if (navigateTo != null)
+            {
+                /* Do only once. */
+                if (navigateTo.TransitionController == null)
+                {
+                    navigateTo.TransitionController = this.TransitionController;
+                }
+
+                await navigateTo.OnTransitedTo(transitionConext);
+            }
+        }
+
 
     }
 }
