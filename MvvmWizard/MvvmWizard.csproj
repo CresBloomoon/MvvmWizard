@@ -45,13 +45,43 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\BindableBase.cs" />
     <Compile Include="Classes\SimpleCommand.cs" />
+    <Compile Include="Classes\SimpleGenericCommand.cs" />
+    <Compile Include="Classes\StepViewModelBase.cs" />
     <Compile Include="Classes\TransitionController.cs" />
+    <Compile Include="Controls\Wizard.TransitionButtons.cs" />
     <Compile Include="Classes\WizardSettings.cs" />
     <Compile Include="Controls\Wizard.cs" />
+    <Compile Include="Controls\Wizard.Summary.cs" />
     <Compile Include="Controls\WizardStep.cs" />
+    <Compile Include="Controls\WizardStep.Summary.cs" />
+    <Compile Include="Controls\WizardStep.TransitionButtons.cs" />
+    <Compile Include="Interfaces\ITransitionAware.cs" />
+    <Compile Include="Classes\TransitionContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Page Include="Styles\Button.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\WizardMahAppsMetroStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Wizard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\WizardStep.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

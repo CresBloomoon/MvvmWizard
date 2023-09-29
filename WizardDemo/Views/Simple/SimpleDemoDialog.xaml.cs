@@ -1,27 +1,30 @@
-﻿using System;
+﻿using MvvmWizard.Classes;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WizardDemo.Views.Simple
 {
     /// <summary>
     /// SimpleDemoDialog.xaml の相互作用ロジック
     /// </summary>
-    public partial class SimpleDemoDialog : Window
+    public partial class SimpleDemoDialog
     {
         public SimpleDemoDialog()
         {
-            InitializeComponent();
+            this.CloseCommand = new SimpleGenericCommand<Dictionary<string, object>>(ExecuteMethod);
+            this.SharedContext = new Dictionary<string, object>();
+            this.SharedContext["In"] = 88;
+
+            this.InitializeComponent();
         }
+
+        private void ExecuteMethod(Dictionary<string, object> obj)
+        {
+            this.Close();
+        }
+
+        public ICommand CloseCommand { get; }
+
+        public Dictionary<string, object> SharedContext { get; }
     }
 }
