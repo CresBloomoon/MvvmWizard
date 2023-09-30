@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Unity;
-
+using WizardDemo.Views.Advanced;
 using SimpleDemoDialog = WizardDemo.Views.Simple.SimpleDemoDialog;
 
 namespace WizardDemo.ViewModels
@@ -20,7 +20,7 @@ namespace WizardDemo.ViewModels
             WizardSettings.Instance.ViewResolver = type => unityContainer.Resolve(type);
 
             this.StartSimpleDemoCommand = new SimpleCommand(() => this.StartDemo(new SimpleDemoDialog()));
-            //this.StartAdvancedDemoCommand = new SimpleCommand(() => this.StartDemo(new AdvancedDemoDialog()));
+            this.StartAdvancedDemoCommand = new SimpleCommand(() => this.StartDemo(new AdvancedDemoDialog()));
         }
 
         /// <summary>

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
-using System.Windows;
-
-namespace MvvmWizard.Controls
+﻿namespace MvvmWizard.Controls
 {
+    using System.Windows;
+    using System.Windows.Media;
+
     public partial class WizardStep
     {
         public static readonly DependencyProperty SummaryItemWidthProperty = DependencyProperty.Register(nameof(SummaryItemWidth), typeof(double), typeof(WizardStep));
@@ -75,5 +70,4 @@ namespace MvvmWizard.Controls
             set { this.SetValue(SummaryItemMouseOverBrushProperty, value); }
         }
     }
-
 }

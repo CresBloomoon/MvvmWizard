@@ -1,5 +1,4 @@
-﻿// ReSharper disable StyleCop.SA1600
-namespace MvvmWizard.Controls
+﻿namespace MvvmWizard.Controls
 {
     using System;
     using System.Windows;
