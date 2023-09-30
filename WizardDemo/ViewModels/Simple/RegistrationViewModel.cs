@@ -68,7 +68,7 @@ namespace WizardDemo.ViewModels.Simple {
 
             //遷移先ステップに渡すコンテキストにユーザが入力した情報を設定する
             //以下だと、
-            transitionContext.SharedContext["UserDetails"] = new UserDetails(this.FirstName, this.LastName, this.Email);
+            transitionContext.SharedContext[nameof(UserDetails)] = new UserDetails(this.FirstName, this.LastName, this.Email);
 
             try {
                 this.IsProcessing = true;
