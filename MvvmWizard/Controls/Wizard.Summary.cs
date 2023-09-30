@@ -1,10 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace MvvmWizard.Controls
-{
-    public partial class Wizard
-    {
+namespace MvvmWizard.Controls {
+    public partial class Wizard {
         public static readonly DependencyProperty SummaryPanelTemplateProperty = DependencyProperty.Register(nameof(SummaryPanelTemplate), typeof(ItemsPanelTemplate), typeof(Wizard));
         public static readonly DependencyProperty SummaryVisibilityProperty = DependencyProperty.Register(nameof(SummaryVisibility), typeof(Visibility), typeof(Wizard), new PropertyMetadata(Visibility.Visible));
         public static readonly DependencyProperty AllowNavigationOnSummaryItemClickProperty = DependencyProperty.Register(nameof(AllowNavigationOnSummaryItemClick), typeof(bool), typeof(Wizard));
@@ -14,38 +12,32 @@ namespace MvvmWizard.Controls
 
         public static readonly DependencyProperty SummaryMarginProperty = DependencyProperty.Register(nameof(SummaryMargin), typeof(Thickness), typeof(Wizard));
 
-        public ItemsPanelTemplate SummaryPanelTemplate
-        {
+        public ItemsPanelTemplate SummaryPanelTemplate {
             get { return (ItemsPanelTemplate)this.GetValue(SummaryPanelTemplateProperty); }
             set { this.SetValue(SummaryPanelTemplateProperty, value); }
         }
 
-        public Visibility SummaryVisibility
-        {
+        public Visibility SummaryVisibility {
             get { return (Visibility)this.GetValue(SummaryVisibilityProperty); }
             set { this.SetValue(SummaryVisibilityProperty, value); }
         }
 
-        public bool AllowNavigationOnSummaryItemClick
-        {
+        public bool AllowNavigationOnSummaryItemClick {
             get { return (bool)this.GetValue(AllowNavigationOnSummaryItemClickProperty); }
             set { this.SetValue(AllowNavigationOnSummaryItemClickProperty, value); }
         }
 
-        public HorizontalAlignment SummaryHorizontalAlignment
-        {
+        public HorizontalAlignment SummaryHorizontalAlignment {
             get { return (HorizontalAlignment)this.GetValue(SummaryHorizontalAlignmentProperty); }
             set { this.SetValue(SummaryHorizontalAlignmentProperty, value); }
         }
 
-        public VerticalAlignment SummaryVerticalAlignment
-        {
+        public VerticalAlignment SummaryVerticalAlignment {
             get { return (VerticalAlignment)this.GetValue(SummaryVerticalAlignmentProperty); }
             set { this.SetValue(SummaryVerticalAlignmentProperty, value); }
         }
 
-        public Thickness SummaryMargin
-        {
+        public Thickness SummaryMargin {
             get { return (Thickness)this.GetValue(SummaryMarginProperty); }
             set { this.SetValue(SummaryMarginProperty, value); }
         }

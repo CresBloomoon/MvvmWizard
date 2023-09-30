@@ -1,10 +1,8 @@
-﻿namespace MvvmWizard.Controls
-{
+﻿namespace MvvmWizard.Controls {
     using System.Windows;
     using System.Windows.Media;
 
-    public partial class WizardStep
-    {
+    public partial class WizardStep {
         public static readonly DependencyProperty BackButtonTooltipProperty = DependencyProperty.Register(nameof(BackButtonTooltip), typeof(object), typeof(WizardStep));
         public static readonly DependencyProperty SkipButtonTooltipProperty = DependencyProperty.Register(nameof(SkipButtonTooltip), typeof(object), typeof(WizardStep));
         public static readonly DependencyProperty ForwardButtonTooltipProperty = DependencyProperty.Register(nameof(ForwardButtonTooltip), typeof(object), typeof(WizardStep));
@@ -98,438 +96,369 @@
         public static readonly DependencyProperty ForwardButtonFontStyleProperty = DependencyProperty.Register(nameof(ForwardButtonFontStyle), typeof(FontStyle), typeof(WizardStep));
 
         /* Tooltip */
-        public object BackButtonTooltip
-        {
+        public object BackButtonTooltip {
             get { return this.GetValue(BackButtonTooltipProperty); }
             set { this.SetValue(BackButtonTooltipProperty, value); }
         }
 
-        public object SkipButtonTooltip
-        {
+        public object SkipButtonTooltip {
             get { return this.GetValue(SkipButtonTooltipProperty); }
             set { this.SetValue(SkipButtonTooltipProperty, value); }
         }
 
-        public object ForwardButtonTooltip
-        {
+        public object ForwardButtonTooltip {
             get { return this.GetValue(ForwardButtonTooltipProperty); }
             set { this.SetValue(ForwardButtonTooltipProperty, value); }
         }
 
         /* Visibility */
-        public Visibility BackButtonVisibility
-        {
+        public Visibility BackButtonVisibility {
             get { return (Visibility)this.GetValue(BackButtonVisibilityProperty); }
             set { this.SetValue(BackButtonVisibilityProperty, value); }
         }
 
-        public Visibility SkipButtonVisibility
-        {
+        public Visibility SkipButtonVisibility {
             get { return (Visibility)this.GetValue(SkipButtonVisibilityProperty); }
             set { this.SetValue(SkipButtonVisibilityProperty, value); }
         }
 
-        public Visibility ForwardButtonVisibility
-        {
+        public Visibility ForwardButtonVisibility {
             get { return (Visibility)this.GetValue(ForwardButtonVisibilityProperty); }
             set { this.SetValue(ForwardButtonVisibilityProperty, value); }
         }
 
         /* IsEnabled */
-        public bool BackButtonIsEnabled
-        {
+        public bool BackButtonIsEnabled {
             get { return (bool)this.GetValue(BackButtonIsEnabledProperty); }
             set { this.SetValue(BackButtonIsEnabledProperty, value); }
         }
 
-        public bool SkipButtonIsEnabled
-        {
+        public bool SkipButtonIsEnabled {
             get { return (bool)this.GetValue(SkipButtonIsEnabledProperty); }
             set { this.SetValue(SkipButtonIsEnabledProperty, value); }
         }
 
-        public bool ForwardButtonIsEnabled
-        {
+        public bool ForwardButtonIsEnabled {
             get { return (bool)this.GetValue(ForwardButtonIsEnabledProperty); }
             set { this.SetValue(ForwardButtonIsEnabledProperty, value); }
         }
 
         /* Title */
-        public string BackButtonTitle
-        {
+        public string BackButtonTitle {
             get { return (string)this.GetValue(BackButtonTitleProperty); }
             set { this.SetValue(BackButtonTitleProperty, value); }
         }
 
-        public string SkipButtonTitle
-        {
+        public string SkipButtonTitle {
             get { return (string)this.GetValue(SkipButtonTitleProperty); }
             set { this.SetValue(SkipButtonTitleProperty, value); }
         }
 
-        public string ForwardButtonTitle
-        {
+        public string ForwardButtonTitle {
             get { return (string)this.GetValue(ForwardButtonTitleProperty); }
             set { this.SetValue(ForwardButtonTitleProperty, value); }
         }
 
         /* Icon */
-        public object BackButtonIcon
-        {
+        public object BackButtonIcon {
             get { return this.GetValue(BackButtonIconProperty); }
             set { this.SetValue(BackButtonIconProperty, value); }
         }
 
-        public object SkipButtonIcon
-        {
+        public object SkipButtonIcon {
             get { return this.GetValue(SkipButtonIconProperty); }
             set { this.SetValue(SkipButtonIconProperty, value); }
         }
 
-        public object ForwardButtonIcon
-        {
+        public object ForwardButtonIcon {
             get { return this.GetValue(ForwardButtonIconProperty); }
             set { this.SetValue(ForwardButtonIconProperty, value); }
         }
 
         /* Foreground */
-        public Brush BackButtonForeground
-        {
+        public Brush BackButtonForeground {
             get { return (Brush)this.GetValue(BackButtonForegroundProperty); }
             set { this.SetValue(BackButtonForegroundProperty, value); }
         }
 
-        public Brush SkipButtonForeground
-        {
+        public Brush SkipButtonForeground {
             get { return (Brush)this.GetValue(SkipButtonForegroundProperty); }
             set { this.SetValue(SkipButtonForegroundProperty, value); }
         }
 
-        public Brush ForwardButtonForeground
-        {
+        public Brush ForwardButtonForeground {
             get { return (Brush)this.GetValue(ForwardButtonForegroundProperty); }
             set { this.SetValue(ForwardButtonForegroundProperty, value); }
         }
 
         /* Background */
-        public Brush BackButtonBackground
-        {
+        public Brush BackButtonBackground {
             get { return (Brush)this.GetValue(BackButtonBackgroundProperty); }
             set { this.SetValue(BackButtonBackgroundProperty, value); }
         }
 
-        public Brush SkipButtonBackground
-        {
+        public Brush SkipButtonBackground {
             get { return (Brush)this.GetValue(SkipButtonBackgroundProperty); }
             set { this.SetValue(SkipButtonBackgroundProperty, value); }
         }
 
-        public Brush ForwardButtonBackground
-        {
+        public Brush ForwardButtonBackground {
             get { return (Brush)this.GetValue(ForwardButtonBackgroundProperty); }
             set { this.SetValue(ForwardButtonBackgroundProperty, value); }
         }
 
         /* Mouse Over Background */
-        public Brush BackButtonMouseMouseOverBackground
-        {
+        public Brush BackButtonMouseMouseOverBackground {
             get { return (Brush)this.GetValue(BackButtonMouseMouseOverBackgroundProperty); }
             set { this.SetValue(BackButtonMouseMouseOverBackgroundProperty, value); }
         }
 
-        public Brush SkipButtonMouseMouseOverBackground
-        {
+        public Brush SkipButtonMouseMouseOverBackground {
             get { return (Brush)this.GetValue(SkipButtonMouseMouseOverBackgroundProperty); }
             set { this.SetValue(SkipButtonMouseMouseOverBackgroundProperty, value); }
         }
 
-        public Brush ForwardButtonMouseMouseOverBackground
-        {
+        public Brush ForwardButtonMouseMouseOverBackground {
             get { return (Brush)this.GetValue(ForwardButtonMouseMouseOverBackgroundProperty); }
             set { this.SetValue(ForwardButtonMouseMouseOverBackgroundProperty, value); }
         }
 
         /* Border Brush */
-        public Brush BackButtonBorderBrush
-        {
+        public Brush BackButtonBorderBrush {
             get { return (Brush)this.GetValue(BackButtonBorderBrushProperty); }
             set { this.SetValue(BackButtonBorderBrushProperty, value); }
         }
 
-        public Brush SkipButtonBorderBrush
-        {
+        public Brush SkipButtonBorderBrush {
             get { return (Brush)this.GetValue(SkipButtonBorderBrushProperty); }
             set { this.SetValue(SkipButtonBorderBrushProperty, value); }
         }
 
-        public Brush ForwardButtonBorderBrush
-        {
+        public Brush ForwardButtonBorderBrush {
             get { return (Brush)this.GetValue(ForwardButtonBorderBrushProperty); }
             set { this.SetValue(ForwardButtonBorderBrushProperty, value); }
         }
 
         /* Border Thickness */
-        public Thickness BackButtonBorderThickness
-        {
+        public Thickness BackButtonBorderThickness {
             get { return (Thickness)this.GetValue(BackButtonBorderThicknessProperty); }
             set { this.SetValue(BackButtonBorderThicknessProperty, value); }
         }
 
-        public Thickness SkipButtonBorderThickness
-        {
+        public Thickness SkipButtonBorderThickness {
             get { return (Thickness)this.GetValue(SkipButtonBorderThicknessProperty); }
             set { this.SetValue(SkipButtonBorderThicknessProperty, value); }
         }
 
-        public Thickness ForwardButtonBorderThickness
-        {
+        public Thickness ForwardButtonBorderThickness {
             get { return (Thickness)this.GetValue(ForwardButtonBorderThicknessProperty); }
             set { this.SetValue(ForwardButtonBorderThicknessProperty, value); }
         }
 
         /* Min Width */
-        public double BackButtonMinWidth
-        {
+        public double BackButtonMinWidth {
             get { return (double)this.GetValue(BackButtonMinWidthProperty); }
             set { this.SetValue(BackButtonMinWidthProperty, value); }
         }
 
-        public double SkipButtonMinWidth
-        {
+        public double SkipButtonMinWidth {
             get { return (double)this.GetValue(SkipButtonMinWidthProperty); }
             set { this.SetValue(SkipButtonMinWidthProperty, value); }
         }
 
-        public double ForwardButtonMinWidth
-        {
+        public double ForwardButtonMinWidth {
             get { return (double)this.GetValue(ForwardButtonMinWidthProperty); }
             set { this.SetValue(ForwardButtonMinWidthProperty, value); }
         }
 
         /* Min Height */
-        public double BackButtonMinHeight
-        {
+        public double BackButtonMinHeight {
             get { return (double)this.GetValue(BackButtonMinHeightProperty); }
             set { this.SetValue(BackButtonMinHeightProperty, value); }
         }
 
-        public double SkipButtonMinHeight
-        {
+        public double SkipButtonMinHeight {
             get { return (double)this.GetValue(SkipButtonMinHeightProperty); }
             set { this.SetValue(SkipButtonMinHeightProperty, value); }
         }
 
-        public double ForwardButtonMinHeight
-        {
+        public double ForwardButtonMinHeight {
             get { return (double)this.GetValue(ForwardButtonMinHeightProperty); }
             set { this.SetValue(ForwardButtonMinHeightProperty, value); }
         }
 
         /* Width */
-        public double BackButtonWidth
-        {
+        public double BackButtonWidth {
             get { return (double)this.GetValue(BackButtonWidthProperty); }
             set { this.SetValue(BackButtonWidthProperty, value); }
         }
 
-        public double SkipButtonWidth
-        {
+        public double SkipButtonWidth {
             get { return (double)this.GetValue(SkipButtonWidthProperty); }
             set { this.SetValue(SkipButtonWidthProperty, value); }
         }
 
-        public double ForwardButtonWidth
-        {
+        public double ForwardButtonWidth {
             get { return (double)this.GetValue(ForwardButtonWidthProperty); }
             set { this.SetValue(ForwardButtonWidthProperty, value); }
         }
 
         /* Height */
-        public double BackButtonHeight
-        {
+        public double BackButtonHeight {
             get { return (double)this.GetValue(BackButtonHeightProperty); }
             set { this.SetValue(BackButtonHeightProperty, value); }
         }
 
-        public double SkipButtonHeight
-        {
+        public double SkipButtonHeight {
             get { return (double)this.GetValue(SkipButtonHeightProperty); }
             set { this.SetValue(SkipButtonHeightProperty, value); }
         }
 
-        public double ForwardButtonHeight
-        {
+        public double ForwardButtonHeight {
             get { return (double)this.GetValue(ForwardButtonHeightProperty); }
             set { this.SetValue(ForwardButtonHeightProperty, value); }
         }
 
         /* Max Width */
-        public double BackButtonMaxWidth
-        {
+        public double BackButtonMaxWidth {
             get { return (double)this.GetValue(BackButtonMaxWidthProperty); }
             set { this.SetValue(BackButtonMaxWidthProperty, value); }
         }
 
-        public double SkipButtonMaxWidth
-        {
+        public double SkipButtonMaxWidth {
             get { return (double)this.GetValue(SkipButtonMaxWidthProperty); }
             set { this.SetValue(SkipButtonMaxWidthProperty, value); }
         }
 
-        public double ForwardButtonMaxWidth
-        {
+        public double ForwardButtonMaxWidth {
             get { return (double)this.GetValue(ForwardButtonMaxWidthProperty); }
             set { this.SetValue(ForwardButtonMaxWidthProperty, value); }
         }
 
         /* Max Height */
-        public double BackButtonMaxHeight
-        {
+        public double BackButtonMaxHeight {
             get { return (double)this.GetValue(BackButtonMaxHeightProperty); }
             set { this.SetValue(BackButtonMaxHeightProperty, value); }
         }
 
-        public double SkipButtonMaxHeight
-        {
+        public double SkipButtonMaxHeight {
             get { return (double)this.GetValue(SkipButtonMaxHeightProperty); }
             set { this.SetValue(SkipButtonMaxHeightProperty, value); }
         }
 
-        public double ForwardButtonMaxHeight
-        {
+        public double ForwardButtonMaxHeight {
             get { return (double)this.GetValue(ForwardButtonMaxHeightProperty); }
             set { this.SetValue(ForwardButtonMaxHeightProperty, value); }
         }
 
         /* Margin */
-        public Thickness BackButtonMargin
-        {
+        public Thickness BackButtonMargin {
             get { return (Thickness)this.GetValue(BackButtonMarginProperty); }
             set { this.SetValue(BackButtonMarginProperty, value); }
         }
 
-        public Thickness SkipButtonMargin
-        {
+        public Thickness SkipButtonMargin {
             get { return (Thickness)this.GetValue(SkipButtonMarginProperty); }
             set { this.SetValue(SkipButtonMarginProperty, value); }
         }
 
-        public Thickness ForwardButtonMargin
-        {
+        public Thickness ForwardButtonMargin {
             get { return (Thickness)this.GetValue(ForwardButtonMarginProperty); }
             set { this.SetValue(ForwardButtonMarginProperty, value); }
         }
 
         /* Corner Radius */
-        public CornerRadius BackButtonCornerRadius
-        {
+        public CornerRadius BackButtonCornerRadius {
             get { return (CornerRadius)this.GetValue(BackButtonCornerRadiusProperty); }
             set { this.SetValue(BackButtonCornerRadiusProperty, value); }
         }
 
-        public CornerRadius SkipButtonCornerRadius
-        {
+        public CornerRadius SkipButtonCornerRadius {
             get { return (CornerRadius)this.GetValue(SkipButtonCornerRadiusProperty); }
             set { this.SetValue(SkipButtonCornerRadiusProperty, value); }
         }
 
-        public CornerRadius ForwardButtonCornerRadius
-        {
+        public CornerRadius ForwardButtonCornerRadius {
             get { return (CornerRadius)this.GetValue(ForwardButtonCornerRadiusProperty); }
             set { this.SetValue(ForwardButtonCornerRadiusProperty, value); }
         }
 
         /* Horizontal Content Alignment */
-        public HorizontalAlignment BackButtonHorizontalContentAlignment
-        {
+        public HorizontalAlignment BackButtonHorizontalContentAlignment {
             get { return (HorizontalAlignment)this.GetValue(BackButtonHorizontalContentAlignmentProperty); }
             set { this.SetValue(BackButtonHorizontalContentAlignmentProperty, value); }
         }
 
-        public HorizontalAlignment SkipButtonHorizontalContentAlignment
-        {
+        public HorizontalAlignment SkipButtonHorizontalContentAlignment {
             get { return (HorizontalAlignment)this.GetValue(SkipButtonHorizontalContentAlignmentProperty); }
             set { this.SetValue(SkipButtonHorizontalContentAlignmentProperty, value); }
         }
 
-        public HorizontalAlignment ForwardButtonHorizontalContentAlignment
-        {
+        public HorizontalAlignment ForwardButtonHorizontalContentAlignment {
             get { return (HorizontalAlignment)this.GetValue(ForwardButtonHorizontalContentAlignmentProperty); }
             set { this.SetValue(ForwardButtonHorizontalContentAlignmentProperty, value); }
         }
 
         /* Vertical Content Alignment */
-        public VerticalAlignment BackButtonVerticalContentAlignment
-        {
+        public VerticalAlignment BackButtonVerticalContentAlignment {
             get { return (VerticalAlignment)this.GetValue(BackButtonVerticalContentAlignmentProperty); }
             set { this.SetValue(BackButtonVerticalContentAlignmentProperty, value); }
         }
 
-        public VerticalAlignment SkipButtonVerticalContentAlignment
-        {
+        public VerticalAlignment SkipButtonVerticalContentAlignment {
             get { return (VerticalAlignment)this.GetValue(SkipButtonVerticalContentAlignmentProperty); }
             set { this.SetValue(SkipButtonVerticalContentAlignmentProperty, value); }
         }
 
-        public VerticalAlignment ForwardButtonVerticalContentAlignment
-        {
+        public VerticalAlignment ForwardButtonVerticalContentAlignment {
             get { return (VerticalAlignment)this.GetValue(ForwardButtonVerticalContentAlignmentProperty); }
             set { this.SetValue(ForwardButtonVerticalContentAlignmentProperty, value); }
         }
 
         /* Font Size */
-        public double BackButtonFontSize
-        {
+        public double BackButtonFontSize {
             get { return (double)this.GetValue(BackButtonFontSizeProperty); }
             set { this.SetValue(BackButtonFontSizeProperty, value); }
         }
 
-        public double SkipButtonFontSize
-        {
+        public double SkipButtonFontSize {
             get { return (double)this.GetValue(SkipButtonFontSizeProperty); }
             set { this.SetValue(SkipButtonFontSizeProperty, value); }
         }
 
-        public double ForwardButtonFontSize
-        {
+        public double ForwardButtonFontSize {
             get { return (double)this.GetValue(ForwardButtonFontSizeProperty); }
             set { this.SetValue(ForwardButtonFontSizeProperty, value); }
         }
 
         /* Font Weight */
-        public FontWeight BackButtonFontWeight
-        {
+        public FontWeight BackButtonFontWeight {
             get { return (FontWeight)this.GetValue(BackButtonFontWeightProperty); }
             set { this.SetValue(BackButtonFontWeightProperty, value); }
         }
 
-        public FontWeight SkipButtonFontWeight
-        {
+        public FontWeight SkipButtonFontWeight {
             get { return (FontWeight)this.GetValue(SkipButtonFontWeightProperty); }
             set { this.SetValue(SkipButtonFontWeightProperty, value); }
         }
 
-        public FontWeight ForwardButtonFontWeight
-        {
+        public FontWeight ForwardButtonFontWeight {
             get { return (FontWeight)this.GetValue(ForwardButtonFontWeightProperty); }
             set { this.SetValue(ForwardButtonFontWeightProperty, value); }
         }
 
         /* Font Style */
-        public FontStyle BackButtonFontStyle
-        {
+        public FontStyle BackButtonFontStyle {
             get { return (FontStyle)this.GetValue(BackButtonFontStyleProperty); }
             set { this.SetValue(BackButtonFontStyleProperty, value); }
         }
 
-        public FontStyle SkipButtonFontStyle
-        {
+        public FontStyle SkipButtonFontStyle {
             get { return (FontStyle)this.GetValue(SkipButtonFontStyleProperty); }
             set { this.SetValue(SkipButtonFontStyleProperty, value); }
         }
 
-        public FontStyle ForwardButtonFontStyle
-        {
+        public FontStyle ForwardButtonFontStyle {
             get { return (FontStyle)this.GetValue(ForwardButtonFontStyleProperty); }
             set { this.SetValue(ForwardButtonFontStyleProperty, value); }
         }

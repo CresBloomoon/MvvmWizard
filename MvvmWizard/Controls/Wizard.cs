@@ -6,8 +6,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Security.RightsManagement;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,10 +13,8 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 
-namespace MvvmWizard.Controls
-{
-    public partial class Wizard : Selector, INotifyPropertyChanged
-    {
+namespace MvvmWizard.Controls {
+    public partial class Wizard : Selector, INotifyPropertyChanged {
         public event PropertyChangedEventHandler PropertyChanged;
 
         public static readonly DependencyProperty SharedContextProperty = DependencyProperty.Register(nameof(SharedContext), typeof(Dictionary<string, object>), typeof(Wizard));
@@ -43,8 +39,7 @@ namespace MvvmWizard.Controls
         public bool IsFirstStep => this.CurrentStepIndex == this.FirstStepIndex;
         public bool IsLastStep => this.CurrentStepIndex == this.LastStepIndex;
 
-        static Wizard()
-        {
+        static Wizard() {
             //本クラスのデフォルトスタイルキーを指定
             //スタイルキーは、WPFコントロールがどのスタイルを使用するかを示すもので、ここでは本クラス自体がそのデフォルトのスタイルキーとして設定している。
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Wizard), new FrameworkPropertyMetadata(typeof(Wizard)));
@@ -54,8 +49,7 @@ namespace MvvmWizard.Controls
 
             //ページが前に進むときのアニメーションを設定。
             AnimationTimeline animationForward =
-                new ThicknessAnimation
-                {
+                new ThicknessAnimation {
                     //アニメーションの持続時間
                     Duration = new Duration(TimeSpan.FromMilliseconds(300)),
                     //アニメーションの開始位置
@@ -76,8 +70,7 @@ namespace MvvmWizard.Controls
             //ページが後ろに戻るときのアニメーションを設定。あとは前に進むときと同じ。
             DefaultBackwardTransitionAnimation = new Storyboard();
             AnimationTimeline animationBackward =
-                new ThicknessAnimation
-                {
+                new ThicknessAnimation {
                     Duration = new Duration(TimeSpan.FromMilliseconds(300)),
                     From = new Thickness(-500, 0, 500, 0),
                     To = new Thickness(0),
@@ -89,8 +82,7 @@ namespace MvvmWizard.Controls
             DefaultBackwardTransitionAnimation.Freeze();
         }
 
-        public Wizard()
-        {
+        public Wizard() {
             this.SharedContext = new Dictionary<string, object>();
 
             this.TransitionController = new TransitionController(
@@ -103,80 +95,65 @@ namespace MvvmWizard.Controls
             this.Loaded += this.OnLoaded;
         }
 
-        public Dictionary<string, object> SharedContext
-        {
+        public Dictionary<string, object> SharedContext {
             get { return (Dictionary<string, object>)this.GetValue(SharedContextProperty); }
             set { SetValue(SharedContextProperty, value); }
         }
 
-        public ICommand FinishCommand
-        {
+        public ICommand FinishCommand {
             get { return (ICommand)this.GetValue(FinishCommandProperty); }
             set { this.SetValue(FinishCommandProperty, value); }
         }
 
-        public bool IsTransitionAnimationEnabled
-        {
+        public bool IsTransitionAnimationEnabled {
             get { return (bool)this.GetValue(IsTransitionAnimationEnabledProperty); }
             set { this.SetValue(IsTransitionAnimationEnabledProperty, value); }
         }
 
-        public bool UseCircularNavigation
-        {
+        public bool UseCircularNavigation {
             get { return (bool)this.GetValue(UseCircularNavigationProperty); }
             set { this.SetValue(UseCircularNavigationProperty, value); }
         }
 
-        public double NavigationBlockMinHeight
-        {
+        public double NavigationBlockMinHeight {
             get { return (double)this.GetValue(NavigationBlockMinHeightProperty); }
             set { this.SetValue(NavigationBlockMinHeightProperty, value); }
         }
 
-        public Storyboard ForwardTransitionAnimation
-        {
+        public Storyboard ForwardTransitionAnimation {
             get { return (Storyboard)this.GetValue(ForwardTransitionAnimationProperty); }
             set { this.SetValue(ForwardTransitionAnimationProperty, value); }
         }
 
-        public Storyboard BackwardTransitionAnimation
-        {
+        public Storyboard BackwardTransitionAnimation {
             get { return (Storyboard)this.GetValue(BackwardTransitionAnimationProperty); }
             set { this.SetValue(BackwardTransitionAnimationProperty, value); }
         }
 
-        public bool IsTransiting
-        {
+        public bool IsTransiting {
             get { return this._isTransiting; }
-            set
-            {
+            set {
                 this._isTransiting = value;
                 this.RaisePropertyChanged();
             }
         }
 
-        public async void TryTransitTo(int transitToIndex, bool skippingStep = false)
-        {
-            try
-            {
+        public async void TryTransitTo(int transitToIndex, bool skippingStep = false) {
+            try {
                 this.IsTransiting = true;
                 await this.TransitTo(transitToIndex, skippingStep);
             }
-            finally
-            {
+            finally {
                 this.IsTransiting = false;
             }
         }
 
-        protected override void OnSelectionChanged(SelectionChangedEventArgs e)
-        {
-            foreach (WizardStep step in e.RemovedItems.OfType<WizardStep>())
-            {
+        protected override void OnSelectionChanged(SelectionChangedEventArgs e) {
+            foreach (WizardStep step in e.RemovedItems.OfType<WizardStep>()) {
                 step.IsSelected = false;
             }
 
-            if (e.AddedItems.Count == 0)
-            {
+            if (e.AddedItems.Count == 0) {
                 base.OnSelectionChanged(e);
                 return;
             }
@@ -184,8 +161,7 @@ namespace MvvmWizard.Controls
             var selectedStep = (WizardStep)e.AddedItems[0];
             selectedStep.IsSelected = true;
 
-            if (DesignerProperties.GetIsInDesignMode(this))
-            {
+            if (DesignerProperties.GetIsInDesignMode(this)) {
                 return;
             }
 
@@ -196,46 +172,38 @@ namespace MvvmWizard.Controls
             base.OnSelectionChanged(e);
         }
 
-        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
-        {
+        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null) {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
+        private void OnLoaded(object sender, RoutedEventArgs e) {
             this.Loaded -= this.OnLoaded;
 
             this.TryTransitTo(this.FirstStepIndex);
         }
 
-        private void ShowNextStep(bool skippingStep)
-        {
+        private void ShowNextStep(bool skippingStep) {
             int navigateTo = this.CurrentStepIndex + 1;
 
-            if (this.UseCircularNavigation && this.IsLastStep)
-            {
+            if (this.UseCircularNavigation && this.IsLastStep) {
                 navigateTo = this.FirstStepIndex;
             }
 
             this.TryTransitTo(navigateTo, skippingStep);
         }
 
-        private void ShowPreviousStep()
-        {
+        private void ShowPreviousStep() {
             int navigateTo = this.CurrentStepIndex - 1;
 
-            if (this.UseCircularNavigation && this.IsFirstStep)
-            {
+            if (this.UseCircularNavigation && this.IsFirstStep) {
                 navigateTo = this.LastStepIndex;
             }
 
             this.TryTransitTo(navigateTo);
         }
 
-        private async Task TransitTo(int transitToIndex, bool skippingStep)
-        {
-            var transitionConext = new TransitionContext
-            {
+        private async Task TransitTo(int transitToIndex, bool skippingStep) {
+            var transitionConext = new TransitionContext {
                 SharedContext = this.SharedContext,
                 TransitedFromStep = this.CurrentStepIndex,
                 TransitToStep = transitToIndex,
@@ -252,17 +220,14 @@ namespace MvvmWizard.Controls
             navigatingForward |= this.IsLastStep && transitToIndex == this.FirstStepIndex;
 
             /* Transit From (OnLoaded starts with "-1") */
-            if (this.CurrentStepIndex >= this.FirstStepIndex)
-            {
+            if (this.CurrentStepIndex >= this.FirstStepIndex) {
                 var navigateFromView = (FrameworkElement)this.CurrentStep.Content;
                 var navigateFrom = navigateFromView?.DataContext as ITransitionAware;
 
-                if (navigateFrom != null)
-                {
+                if (navigateFrom != null) {
                     await navigateFrom.OnTransitedFrom(transitionConext);
 
-                    if (transitionConext.AbortTransition)
-                    {
+                    if (transitionConext.AbortTransition) {
                         return;
                     }
                 }
@@ -271,17 +236,14 @@ namespace MvvmWizard.Controls
             }
 
             /* Non-circular and index was not changed (by user) -> Special cases for first and last steps */
-            if (!this.UseCircularNavigation && transitionConext.TransitToStep == transitToIndex)
-            {
+            if (!this.UseCircularNavigation && transitionConext.TransitToStep == transitToIndex) {
                 /* First step and navigating back. */
-                if (this.IsFirstStep && transitToIndex < this.FirstStepIndex)
-                {
+                if (this.IsFirstStep && transitToIndex < this.FirstStepIndex) {
                     return;
                 }
 
                 /* Lasts step and navigating forward. */
-                if (this.IsLastStep && transitToIndex > this.LastStepIndex)
-                {
+                if (this.IsLastStep && transitToIndex > this.LastStepIndex) {
                     this.FinishCommand?.Execute(this.SharedContext);
                     return;
                 }
@@ -289,8 +251,7 @@ namespace MvvmWizard.Controls
 
             transitToIndex = transitionConext.TransitToStep;
 
-            if (transitToIndex > this.LastStepIndex)
-            {
+            if (transitToIndex > this.LastStepIndex) {
                 string message =
                     $"Failed navigating to the step with index {transitToIndex} (Index out of range, max index is {this.LastStepIndex})";
 
@@ -301,10 +262,8 @@ namespace MvvmWizard.Controls
 
             WizardStep stepToSelect = (WizardStep)this.Items[transitToIndex];
 
-            if (stepToSelect.Content == null && stepToSelect.ViewType != null)
-            {
-                if (WizardSettings.Instance.ViewResolver == null)
-                {
+            if (stepToSelect.Content == null && stepToSelect.ViewType != null) {
+                if (WizardSettings.Instance.ViewResolver == null) {
                     throw new NullReferenceException("WizardSettings.Instance.ViewResolver is not set.");
                 }
 
@@ -316,8 +275,7 @@ namespace MvvmWizard.Controls
             stepToSelect.UnderlyingDataContext = navigateToView?.DataContext;
             this.SelectedItem = stepToSelect;
 
-            if (this.IsTransitionAnimationEnabled)
-            {
+            if (this.IsTransitionAnimationEnabled) {
                 Storyboard storyboard = navigatingForward
                                             ? (this.ForwardTransitionAnimation ?? DefaultForwardTransitionAnimation)
                                             : (this.BackwardTransitionAnimation ?? DefaultBackwardTransitionAnimation);
@@ -327,11 +285,9 @@ namespace MvvmWizard.Controls
 
             var navigateTo = navigateToView?.DataContext as ITransitionAware;
 
-            if (navigateTo != null)
-            {
+            if (navigateTo != null) {
                 /* Do only once. */
-                if (navigateTo.TransitionController == null)
-                {
+                if (navigateTo.TransitionController == null) {
                     navigateTo.TransitionController = this.TransitionController;
                 }
 

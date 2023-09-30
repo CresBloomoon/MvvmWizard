@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MvvmWizard.Classes
-{
-    public sealed class SimpleCommand : ICommand
-    {
+namespace MvvmWizard.Classes {
+    public sealed class SimpleCommand : ICommand {
         /// <summary>
         /// 実行用デリゲート
         /// </summary>
@@ -19,12 +13,10 @@ namespace MvvmWizard.Classes
         /// </summary>
         private readonly Func<bool> _canExecuteMethod;
 
-        public SimpleCommand(Action executeMethod) : this(executeMethod, () => true)
-        {
+        public SimpleCommand(Action executeMethod) : this(executeMethod, () => true) {
         }
 
-        public SimpleCommand(Action executeMethod, Func<bool> canExecuteMethod)
-        {
+        public SimpleCommand(Action executeMethod, Func<bool> canExecuteMethod) {
             this._executeMethod = executeMethod ??
                 throw new ArgumentNullException(nameof(executeMethod), "実行用デリゲートがnullです。");
             this._canExecuteMethod = canExecuteMethod ??
@@ -33,26 +25,21 @@ namespace MvvmWizard.Classes
 
         public event EventHandler CanExecuteChanged;
 
-        public bool CanExecute()
-        {
+        public bool CanExecute() {
             return this._canExecuteMethod();
         }
 
-        public void Execute()
-        {
-            if (this.CanExecute())
-            {
+        public void Execute() {
+            if (this.CanExecute()) {
                 this._executeMethod();
             }
         }
 
-        public bool CanExecute(object parameter)
-        {
+        public bool CanExecute(object parameter) {
             return this.CanExecute();
         }
 
-        public void Execute(object parameter)
-        {
+        public void Execute(object parameter) {
             this.Execute();
         }
     }

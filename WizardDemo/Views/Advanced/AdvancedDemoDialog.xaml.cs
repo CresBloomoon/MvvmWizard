@@ -1,15 +1,12 @@
-﻿namespace WizardDemo.Views.Advanced
-{
+﻿namespace WizardDemo.Views.Advanced {
     /// <summary>
     /// Interaction logic for AdvancedDemoDialog.xaml
     /// </summary>
-    public partial class AdvancedDemoDialog
-    {
+    public partial class AdvancedDemoDialog {
         /// <summary>
         /// Initializes a new instance of the <see cref="AdvancedDemoDialog"/> class.
         /// </summary>
-        public AdvancedDemoDialog()
-        {
+        public AdvancedDemoDialog() {
             this.InitializeComponent();
         }
     }

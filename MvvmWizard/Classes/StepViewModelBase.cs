@@ -1,26 +1,15 @@
 ﻿using MvvmWizard.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace MvvmWizard.Classes
-{
-    public abstract class StepViewModelBase : BindableBase, ITransitionAware
-    {
-        /// <inheritdoc />
+namespace MvvmWizard.Classes {
+    public abstract class StepViewModelBase : BindableBase, ITransitionAware {
         public TransitionController TransitionController { get; set; }
 
-        /// <inheritdoc />
-        public virtual Task OnTransitedTo(TransitionContext transitionContext)
-        {
+        public virtual Task OnTransitedTo(TransitionContext transitionContext) {
             return Task.FromResult<object>(null);
         }
 
-        /// <inheritdoc />
-        public virtual Task OnTransitedFrom(TransitionContext transitionContext)
-        {
+        public virtual Task OnTransitedFrom(TransitionContext transitionContext) {
             return Task.FromResult<object>(null);
         }
     }

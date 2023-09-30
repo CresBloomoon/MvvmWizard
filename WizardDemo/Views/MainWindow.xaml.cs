@@ -3,15 +3,12 @@ using System.Windows;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
-namespace WizardDemo
-{
+namespace WizardDemo {
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
+    public partial class MainWindow : Window {
+        public MainWindow() {
             // コンストラクタの初期化
             this.InitializeComponent();
 
@@ -20,8 +17,7 @@ namespace WizardDemo
 
             // 前進アニメーション用のDoubleAnimationを作成
             AnimationTimeline animationForward =
-                new DoubleAnimation()
-                {
+                new DoubleAnimation() {
                     // アニメーションの持続時間
                     Duration = new Duration(TimeSpan.FromMilliseconds(2000)),
                     // 開始値
@@ -49,15 +45,13 @@ namespace WizardDemo
         }
 
         // ドメイン全体の未処理の例外が発生したときのイベントハンドラ
-        private void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
+        private void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs e) {
             // 未処理の例外メッセージを表示
             MessageBox.Show($"Error: {e.ExceptionObject}");
         }
 
         // UIスレッドでの未処理の例外が発生したときのイベントハンドラ
-        private void CurrentOnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
-        {
+        private void CurrentOnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e) {
             // 未処理の例外メッセージを表示
             MessageBox.Show($"Error: {e.Exception}");
 

@@ -1,15 +1,9 @@
 ﻿using MvvmWizard.Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WizardDemo.Classes;
 
-namespace WizardDemo.ViewModels.Simple
-{
-    public class RegistrationViewModel : StepViewModelBase
-    {
+namespace WizardDemo.ViewModels.Simple {
+    public class RegistrationViewModel : StepViewModelBase {
         private bool isProcessing;
 
         private string firstName;
@@ -18,62 +12,69 @@ namespace WizardDemo.ViewModels.Simple
 
         private string email;
 
-        public bool IsProcessing
-        {
+        //実行処理中か否かを示す値を取得または設定します。
+        //「処理中はUIを一部無効にする」などの処理を実装するために使用します。
+        //例)インストール処理中は「キャンセル」ボタンを無効にする
+        public bool IsProcessing {
             get { return this.isProcessing; }
             set { this.SetProperty(ref this.isProcessing, value); }
         }
 
-        public string FirstName
-        {
+        //ユーザが入力するFirstNameを取得または設定します。
+        public string FirstName {
             get { return this.firstName; }
-            set
-            {
+            set {
                 this.SetProperty(ref this.firstName, value);
                 RaisePropertyChanged(nameof(MyIsEnabled));
             }
         }
 
-        public string LastName
-        {
+        //ユーザが入力するLastNameを取得または設定します。
+        public string LastName {
             get { return this.lastName; }
-            set
-            {
+            set {
                 this.SetProperty(ref this.lastName, value);
                 RaisePropertyChanged(nameof(MyIsEnabled));
             }
         }
 
-        public string Email
-        {
+        //ユーザが入力するEmailを取得または設定します。
+        public string Email {
             get { return this.email; }
-            set
-            {
+            set {
                 this.SetProperty(ref this.email, value);
                 RaisePropertyChanged(nameof(MyIsEnabled));
             }
         }
 
+        //入力フィールドに有効なデータが入力されているか否かを示す値を取得します。
+        //今回ですと、FirstName, LastName, Emailのいずれかが空文字列でない場合にtrueを返します。
         public bool MyIsEnabled => !string.IsNullOrWhiteSpace(FirstName) && !string.IsNullOrWhiteSpace(lastName) &&
                                    !string.IsNullOrWhiteSpace(Email);
 
-        /// <inheritdoc />
-        public override async Task OnTransitedFrom(TransitionContext transitionContext)
-        {
-            if (transitionContext.TransitToStep < transitionContext.TransitedFromStep)
-            {
+        /// <summary>
+        /// ステップ間の遷移時に実行される処理を実装します。
+        /// ステップを進むごとに呼ばれるメソッドです。
+        /// </summary>
+        /// <param name="transitionContext">次ステップに渡すコンテキスト</param>
+        /// <returns></returns>
+        public override async Task OnTransitedFrom(TransitionContext transitionContext) {
+
+            //遷移先ステップが遷移元ステップよりも前のステップの場合は何もしない
+            //後戻りの場合あは何も処理しないようにするため
+            if (transitionContext.TransitToStep < transitionContext.TransitedFromStep) {
                 return;
             }
 
+            //遷移先ステップに渡すコンテキストにユーザが入力した情報を設定する
+            //以下だと、
             transitionContext.SharedContext["UserDetails"] = new UserDetails(this.FirstName, this.LastName, this.Email);
 
-            try
-            {
+            try {
                 this.IsProcessing = true;
                 await Task.Delay(3000);
             }
-            finally
-            {
+            finally {
                 this.IsProcessing = false;
             }
         }
