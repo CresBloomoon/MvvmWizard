@@ -255,6 +255,9 @@ namespace MvvmWizard.Controls {
                     return;
                 }
 
+                //InstallExecuteCommand実行
+                
+
                 /* Lasts step and navigating forward. */
                 if (this.IsLastStep && transitToIndex > this.LastStepIndex) {
                     this.FinishCommand?.Execute(this.SharedContext);
