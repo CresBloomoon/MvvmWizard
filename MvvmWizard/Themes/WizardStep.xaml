@@ -48,6 +48,21 @@
         <Setter Property="ActiveSummaryItemBrush" Value="#CCFA6800" />
         <Setter Property="SummaryItemMouseOverBrush" Value="#FFFA6800" />
 
+        <Setter Property="CancelButtonHeight" Value="50" />
+        <Setter Property="CancelButtonMinWidth" Value="150" />
+        <Setter Property="CancelButtonMargin" Value="10,10,25,10" />
+        <Setter Property="CancelButtonForeground" Value="White" />
+        <Setter Property="CancelButtonBackground" Value="#FF454545" />
+        <Setter Property="CancelButtonMouseMouseOverBackground" Value="#CCFA6800" />
+        <Setter Property="CancelButtonBorderBrush" Value="#CCFA6800" />
+        <Setter Property="CancelButtonBorderThickness" Value="2" />
+        <Setter Property="CancelButtonCornerRadius" Value="3" />
+        <Setter Property="CancelButtonTitle" Value="Cancel" />
+        <Setter Property="CancelButtonTooltip" Value="Cancel" />
+        <Setter Property="CancelButtonHorizontalContentAlignment" Value="Center" />
+        <Setter Property="CancelButtonVerticalContentAlignment" Value="Center" />
+        <Setter Property="CancelButtonFontSize" Value="14" />
+        <Setter Property="CancelButtonFontWeight" Value="Bold" />
 
         <Setter Property="BackButtonHeight" Value="50" />
         <Setter Property="BackButtonMinWidth" Value="60" />

@@ -8,18 +8,36 @@ namespace WizardDemo.Views.Simple {
     /// </summary>
     public partial class SimpleDemoDialog {
         public SimpleDemoDialog() {
-            this.CloseCommand = new SimpleGenericCommand<Dictionary<string, object>>(ExecuteMethod);
+            this.FinishCommand = new SimpleGenericCommand<Dictionary<string, object>>(FinishMethod);
+            this.CloseCommand = new SimpleGenericCommand<Dictionary<string, object>>(CancelMethod);
+            this.InstallExecuteCommand = new SimpleGenericCommand<Dictionary<string, object>>(InstallExecuteMethod);
             this.SharedContext = new Dictionary<string, object>();
             this.SharedContext["In"] = 88;
 
             this.InitializeComponent();
         }
 
-        private void ExecuteMethod(Dictionary<string, object> obj) {
+        private void FinishMethod(Dictionary<string, object> obj) {
             this.Close();
         }
 
+        private void CancelMethod(Dictionary<string, object> obj) {
+            //後始末処理
+
+            this.Close();
+        }
+
+        private void InstallExecuteMethod(Dictionary<string, object> obj) {
+            //インストール処理
+
+            //Start();
+        }
+
+        public ICommand FinishCommand { get; }
+
         public ICommand CloseCommand { get; }
+
+        public ICommand InstallExecuteCommand { get; }
 
         public Dictionary<string, object> SharedContext { get; }
     }

@@ -22,7 +22,10 @@
             </ResourceDictionary>
         </Grid.Resources>-->
 
-        <controls:Wizard FinishCommand="{Binding CloseCommand, ElementName=ThisWindow}" SharedContext="{Binding SharedContext,  ElementName=ThisWindow}">
+        <controls:Wizard FinishCommand="{Binding FinishCommand, ElementName=ThisWindow}"
+                         CancelCommand="{Binding CloseCommand, ElementName=ThisWindow}"
+                         InstallExecuteCommand="{Binding InstallExecuteCommand, ElementName=ThisWindow}"
+                         SharedContext="{Binding SharedContext,  ElementName=ThisWindow}">
             <controls:Wizard.Resources>
                 <Style TargetType="controls:WizardStep" BasedOn="{StaticResource {x:Type controls:WizardStep}}">
                     <Setter Property="SkipButtonVisibility" Value="Collapsed" />
@@ -33,9 +36,17 @@
                 <simple:WelcomeView />
             </controls:WizardStep>-->
 
-            <controls:WizardStep x:Name="WelcomeStep" ViewType="{x:Type simple:WelcomeView}" BackButtonVisibility="Collapsed" />
-            <controls:WizardStep x:Name="RegistrationStep" ViewType="{x:Type simple:RegistrationView}"  ForwardButtonIsEnabled="{Binding UnderlyingDataContext.MyIsEnabled, RelativeSource={RelativeSource Self}}"/>
-            <controls:WizardStep x:Name="SummaryStep" ViewType="{x:Type simple:RegistrationSummaryView}" ForwardButtonTitle="Finish" />
+            <controls:WizardStep x:Name="WelcomeStep"
+                                 ViewType="{x:Type simple:WelcomeView}"
+                                 BackButtonVisibility="Collapsed" />
+            <controls:WizardStep x:Name="RegistrationStep"
+                                 ViewType="{x:Type simple:RegistrationView}"
+                                 ForwardButtonIsEnabled="{Binding UnderlyingDataContext.MyIsEnabled, RelativeSource={RelativeSource Self}}"/>
+            <controls:WizardStep x:Name="SummaryStep"
+                                 ViewType="{x:Type simple:RegistrationSummaryView}"
+                                 BackButtonVisibility="Collapsed"
+                                 CancelButtonVisibility="Collapsed"
+                                 ForwardButtonTitle="Finish" />
 
         </controls:Wizard>
     </Grid>

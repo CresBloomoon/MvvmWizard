@@ -23,6 +23,6 @@
         <Setter Property="ForwardButtonBackground" Value="{StaticResource AccentColorBrush}" />
         <Setter Property="ForwardButtonMouseMouseOverBackground" Value="{StaticResource GrayBrush8}" />
         <Setter Property="ForwardButtonBorderBrush" Value="{StaticResource AccentColorBrush}" />
-
+        
     </Style>
 </ResourceDictionary>

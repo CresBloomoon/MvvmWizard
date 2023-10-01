@@ -28,7 +28,12 @@
                 <Grid Grid.Row="1" MinHeight="{TemplateBinding NavigationBlockMinHeight}">
                     
                     <!-- Transition Buttons -->
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="{TemplateBinding TransitionButtonsVerticalAlignment}">
+                        <Button x:Name="PART_CancelButton" Style="{TemplateBinding CancelButtonStyle}" Margin="25,0,0,0"/>
+                    </StackPanel>
+                    
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="{TemplateBinding TransitionButtonsHorizontalAlignment}" VerticalAlignment="{TemplateBinding TransitionButtonsVerticalAlignment}">
+                        <!--<Button x:Name="PART_CancelButton" Style="{TemplateBinding CancelButtonStyle}" />-->
                         <Button x:Name="PART_BackButton" Style="{TemplateBinding BackButtonStyle}"/>
                         <Button x:Name="PART_SkipButton" Style="{TemplateBinding SkipButtonStyle}" />
                         <Button x:Name="PART_ForwardButton" Style="{TemplateBinding ForwardButtonStyle}" />
@@ -61,6 +66,10 @@
             
             <Trigger Property="ForwardButtonStyle" Value="{x:Null}">
                 <Setter TargetName="PART_ForwardButton" Property="Style" Value="{StaticResource ForwardButtonStyle}" />
+            </Trigger>
+
+            <Trigger Property="CancelButtonStyle" Value="{x:Null}">
+                <Setter TargetName="PART_CancelButton" Property="Style" Value="{StaticResource CancelButtonStyle}" />
             </Trigger>
           
         </ControlTemplate.Triggers>

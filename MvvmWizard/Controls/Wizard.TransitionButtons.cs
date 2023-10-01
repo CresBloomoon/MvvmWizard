@@ -8,6 +8,7 @@ namespace MvvmWizard.Controls {
         public static readonly DependencyProperty BackButtonStyleProperty = DependencyProperty.Register(nameof(BackButtonStyle), typeof(Style), typeof(Wizard));
         public static readonly DependencyProperty SkipButtonStyleProperty = DependencyProperty.Register(nameof(SkipButtonStyle), typeof(Style), typeof(Wizard));
         public static readonly DependencyProperty ForwardButtonStyleProperty = DependencyProperty.Register(nameof(ForwardButtonStyle), typeof(Style), typeof(Wizard));
+        public static readonly DependencyProperty CancelButtonStyleProperty = DependencyProperty.Register(nameof(CancelButtonStyle), typeof(Style), typeof(Wizard));
 
         public VerticalAlignment TransitionButtonsVerticalAlignment {
             get { return (VerticalAlignment)this.GetValue(TransitionButtonsVerticalAlignmentProperty); }
@@ -32,6 +33,11 @@ namespace MvvmWizard.Controls {
         public Style ForwardButtonStyle {
             get { return (Style)this.GetValue(ForwardButtonStyleProperty); }
             set { this.SetValue(ForwardButtonStyleProperty, value); }
+        }
+
+        public Style CancelButtonStyle {
+            get { return (Style)this.GetValue(CancelButtonStyleProperty); }
+            set { this.SetValue(CancelButtonStyleProperty, value); }
         }
     }
 }

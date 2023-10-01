@@ -19,6 +19,8 @@ namespace MvvmWizard.Controls {
 
         public static readonly DependencyProperty SharedContextProperty = DependencyProperty.Register(nameof(SharedContext), typeof(Dictionary<string, object>), typeof(Wizard));
         public static readonly DependencyProperty FinishCommandProperty = DependencyProperty.Register(nameof(FinishCommand), typeof(ICommand), typeof(Wizard));
+        public static readonly DependencyProperty CancelCommandProperty = DependencyProperty.Register(nameof(CancelCommand), typeof(ICommand), typeof(Wizard));
+        public static readonly DependencyProperty InstallExecuteCommandProperty = DependencyProperty.Register(nameof(InstallExecuteCommand), typeof(ICommand), typeof(Wizard));
         public static readonly DependencyProperty UseCircularNavigationProperty = DependencyProperty.Register(nameof(UseCircularNavigation), typeof(bool), typeof(Wizard));
         public static readonly DependencyProperty NavigationBlockMinHeightProperty = DependencyProperty.Register(nameof(NavigationBlockMinHeight), typeof(double), typeof(Wizard));
 
@@ -90,6 +92,7 @@ namespace MvvmWizard.Controls {
                 () => this.ShowNextStep(false),
                 () => this.ShowNextStep(true),
                 x => this.FinishCommand?.Execute(x),
+                c => this.CancelCommand?.Execute(c),
                 () => this.SharedContext);
 
             this.Loaded += this.OnLoaded;
@@ -103,6 +106,16 @@ namespace MvvmWizard.Controls {
         public ICommand FinishCommand {
             get { return (ICommand)this.GetValue(FinishCommandProperty); }
             set { this.SetValue(FinishCommandProperty, value); }
+        }
+
+        public ICommand CancelCommand {
+            get { return (ICommand)this.GetValue(CancelCommandProperty); }
+            set { this.SetValue(CancelCommandProperty, value); }
+        }
+
+        public ICommand InstallExecuteCommand {
+            get { return (ICommand)this.GetValue(InstallExecuteCommandProperty); }
+            set { this.SetValue(InstallExecuteCommandProperty, value); }
         }
 
         public bool IsTransitionAnimationEnabled {
