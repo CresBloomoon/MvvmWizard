@@ -42,6 +42,7 @@
             <controls:WizardStep x:Name="RegistrationStep"
                                  ViewType="{x:Type simple:RegistrationView}"
                                  ForwardButtonIsEnabled="{Binding UnderlyingDataContext.MyIsEnabled, RelativeSource={RelativeSource Self}}"
+                                 IsInstallExecutionStep="True"
                                  ForwardButtonTitle="Install Start"/>
             <controls:WizardStep x:Name="SummaryStep"
                                  ViewType="{x:Type simple:RegistrationSummaryView}"

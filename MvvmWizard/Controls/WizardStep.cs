@@ -10,6 +10,8 @@
         public static readonly DependencyProperty UnderlyingDataContextProperty = DependencyProperty.Register(nameof(UnderlyingDataContext), typeof(object), typeof(WizardStep));
         public static readonly DependencyProperty IsSelectedProperty = DependencyProperty.Register(nameof(IsSelected), typeof(bool), typeof(WizardStep));
         public static readonly DependencyProperty IsProcessedProperty = DependencyProperty.Register(nameof(IsProcessed), typeof(bool), typeof(WizardStep));
+        public static readonly DependencyProperty IsInstallExecutionStepProperty = DependencyProperty.Register(nameof(IsInstallExecutionStep), typeof(bool), typeof(Wizard));
+
 
         static WizardStep() {
             DefaultStyleKeyProperty.OverrideMetadata(
@@ -39,6 +41,11 @@
         public bool IsProcessed {
             get { return (bool)this.GetValue(IsProcessedProperty); }
             set { this.SetValue(IsProcessedProperty, value); }
+        }
+
+        public bool IsInstallExecutionStep {
+            get { return (bool)this.GetValue(IsInstallExecutionStepProperty); }
+            set { this.SetValue(IsInstallExecutionStepProperty, value); }
         }
 
         // 親となる "WizardTabControl" を取得するプロパティ
