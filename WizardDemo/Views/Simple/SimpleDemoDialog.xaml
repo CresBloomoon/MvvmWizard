@@ -41,9 +41,11 @@
                                  BackButtonVisibility="Collapsed" />
             <controls:WizardStep x:Name="RegistrationStep"
                                  ViewType="{x:Type simple:RegistrationView}"
-                                 ForwardButtonIsEnabled="{Binding UnderlyingDataContext.MyIsEnabled, RelativeSource={RelativeSource Self}}"
-                                 IsInstallExecutionStep="True"
-                                 ForwardButtonTitle="Install Start"/>
+                                 ForwardButtonIsEnabled="{Binding UnderlyingDataContext.MyIsEnabled, RelativeSource={RelativeSource Self}}"/>
+            <controls:WizardStep x:Name="InstallProgressStep"
+                                 ViewType="{x:Type simple:InstallProgressView}"
+                                 ForwardButtonTitle="Install Start"
+                                 IsInstallExecutionStep="True"/>
             <controls:WizardStep x:Name="SummaryStep"
                                  ViewType="{x:Type simple:RegistrationSummaryView}"
                                  BackButtonVisibility="Collapsed"

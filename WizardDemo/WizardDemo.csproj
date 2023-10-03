@@ -133,6 +133,9 @@
     <Compile Include="Views\Advanced\BasicWizardSettingsView.xaml.cs">
       <DependentUpon>BasicWizardSettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Simple\InstallProgressView.xaml.cs">
+      <DependentUpon>InstallProgressView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Simple\RegistrationSummaryView.xaml.cs">
       <DependentUpon>RegistrationSummaryView.xaml</DependentUpon>
     </Compile>
@@ -170,6 +173,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Simple\InstallProgressView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Simple\RegistrationSummaryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

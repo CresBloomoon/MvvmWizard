@@ -258,7 +258,9 @@ namespace MvvmWizard.Controls {
                 //InstallExecuteCommand実行
                 if (CurrentStep != null && CurrentStep.IsInstallExecutionStep == true) {
                     this.InstallExecuteCommand?.Execute(this.SharedContext);
-                    //return;
+                    CurrentStep.ForwardButtonTitle = "Next";
+                    CurrentStep.BackButtonVisibility = Visibility.Collapsed;
+                    CurrentStep.CancelButtonVisibility = Visibility.Collapsed;
                 }
 
 

@@ -1,5 +1,6 @@
 ﻿using MvvmWizard.Classes;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace WizardDemo.Views.Simple {
@@ -31,6 +32,7 @@ namespace WizardDemo.Views.Simple {
             //インストール処理
 
             //Start();
+            Task.Delay(2000);
         }
 
         public ICommand FinishCommand { get; }
