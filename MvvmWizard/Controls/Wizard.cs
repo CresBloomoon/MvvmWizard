@@ -33,6 +33,11 @@ namespace MvvmWizard.Controls {
 
         private bool _isTransiting;
 
+        /// <summary>
+        /// 1つのViewで2度目のNextボタンを押したときに、次のステップに進むかどうかを示す値を取得または設定します。
+        /// </summary>
+        private bool _isSecondNextButtonEnabled = false;
+
         public TransitionController TransitionController { get; }
         public WizardStep CurrentStep => (WizardStep)this.SelectedItem;
         public int CurrentStepIndex => this.SelectedIndex;
@@ -256,13 +261,17 @@ namespace MvvmWizard.Controls {
                 }
 
                 //InstallExecuteCommand実行
-                if (CurrentStep != null && CurrentStep.IsInstallExecutionStep == true) {
-                    this.InstallExecuteCommand?.Execute(this.SharedContext);
-                    CurrentStep.ForwardButtonTitle = "Next";
-                    CurrentStep.BackButtonVisibility = Visibility.Collapsed;
-                    CurrentStep.CancelButtonVisibility = Visibility.Collapsed;
-                }
+                if (CurrentStep != null && CurrentStep.IsInstallExecutionStep == true && navigatingForward == true) {
+                    if (this._isSecondNextButtonEnabled == false) {
+                        this.InstallExecuteCommand?.Execute(this.SharedContext);
+                        CurrentStep.ForwardButtonTitle = "Next";
+                        CurrentStep.BackButtonVisibility = Visibility.Collapsed;
+                        CurrentStep.CancelButtonVisibility = Visibility.Collapsed;
+                        this._isSecondNextButtonEnabled = true;
+                        return;
+                    }
 
+                }
 
                 //最後のステップで、前に進む場合
                 if (this.IsLastStep && transitToIndex > this.LastStepIndex) {

@@ -49,8 +49,11 @@ namespace WizardDemo.ViewModels.Simple {
 
         //入力フィールドに有効なデータが入力されているか否かを示す値を取得します。
         //今回ですと、FirstName, LastName, Emailのがすべて埋まっていたらtrueを返します。
-        public bool MyIsEnabled => !string.IsNullOrWhiteSpace(FirstName) && !string.IsNullOrWhiteSpace(lastName) &&
-                                   !string.IsNullOrWhiteSpace(Email);
+        //public bool MyIsEnabled => !string.IsNullOrWhiteSpace(FirstName) && !string.IsNullOrWhiteSpace(lastName) &&
+        //                           !string.IsNullOrWhiteSpace(Email);
+
+        ///デバッグのために強制的にTrueにしています。
+        public bool MyIsEnabled = true;
 
         /// <summary>
         /// ステップ間の遷移時に実行される処理を実装します。

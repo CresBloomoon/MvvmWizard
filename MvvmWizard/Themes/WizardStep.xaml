@@ -3,6 +3,8 @@
                     xmlns:controls="clr-namespace:MvvmWizard.Controls">
 
     <ControlTemplate x:Key="WizardStepTemplate" TargetType="controls:WizardStep">
+        
+       <!--画面下部のサマリアイテムの色と形状を定義する-->
         <Ellipse x:Name="SummaryItem" 
                  Width="{TemplateBinding SummaryItemWidth}"
                  Height="{TemplateBinding SummaryItemHeight}" 
