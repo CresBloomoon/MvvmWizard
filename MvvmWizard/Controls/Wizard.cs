@@ -28,6 +28,8 @@ namespace MvvmWizard.Controls {
         public static readonly DependencyProperty ForwardTransitionAnimationProperty = DependencyProperty.Register(nameof(ForwardTransitionAnimation), typeof(Storyboard), typeof(Wizard));
         public static readonly DependencyProperty BackwardTransitionAnimationProperty = DependencyProperty.Register(nameof(BackwardTransitionAnimation), typeof(Storyboard), typeof(Wizard));
 
+        public static string[] Args { get; set; }
+
         private static readonly Storyboard DefaultForwardTransitionAnimation;
         private static readonly Storyboard DefaultBackwardTransitionAnimation;
 
@@ -37,6 +39,7 @@ namespace MvvmWizard.Controls {
         /// 1つのViewで2度目のNextボタンを押したときに、次のステップに進むかどうかを示す値を取得または設定します。
         /// </summary>
         private bool _isSecondNextButtonEnabled = false;
+
 
         public TransitionController TransitionController { get; }
         public WizardStep CurrentStep => (WizardStep)this.SelectedItem;
