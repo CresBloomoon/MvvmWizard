@@ -23,6 +23,11 @@
         <Setter Property="ForwardButtonBackground" Value="{StaticResource AccentColorBrush}" />
         <Setter Property="ForwardButtonMouseMouseOverBackground" Value="{StaticResource GrayBrush8}" />
         <Setter Property="ForwardButtonBorderBrush" Value="{StaticResource AccentColorBrush}" />
-        
+
+        <Setter Property="CancelButtonForeground" Value="{StaticResource IdealForegroundColorBrush}" />
+        <Setter Property="CancelButtonBackground" Value="{StaticResource GrayBrush8}" />
+        <Setter Property="CancelButtonMouseMouseOverBackground" Value="{StaticResource AccentColorBrush}" />
+        <Setter Property="CancelButtonBorderBrush" Value="{StaticResource AccentColorBrush}" />
+
     </Style>
 </ResourceDictionary>
